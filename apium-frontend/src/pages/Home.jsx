@@ -6,8 +6,8 @@ const Home = () => {
   const handleClick = () => {
     const userEmail = localStorage.getItem('userEmail')
 
-    if(userEmail) {
-      navigate("/editor")
+    if(userEmail) {             {/*need to understand it again */}
+      navigate("/editor")   
     } else {
       navigate("/login")
     }
