@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCodeDetails, setRunning, setOutput, setSuccess, setError } from '../redux/codeSlice'
 import CodeService from '../services/CodeService'
 import store from '../redux/store'
+import { useLocation } from "react-router-dom";
 
 export default function EditorHeader() {
 
@@ -28,7 +29,13 @@ export default function EditorHeader() {
     const [loader, setLoader] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch();
+    const location = useLocation();
 
+    useEffect(() => {
+        const initialLanguage = location.state?.aboutSelectedlanguage || "javascript";
+        const foundLanguage = languages.find(lang => lang.value === initialLanguage) || languages[0];
+        setSelectedLanguage(foundLanguage);
+      }, [location.state?.aboutSelectedlanguage]);
 
     useEffect(() => {
         if (selectedLanguage) {
